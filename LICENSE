@@ -1,0 +1,409 @@
+# PrimeronSieve: A Modular, Self-Seeding Prime Wheel Sieve
+# Copyright (C) 2025 Brian Cameron and OpenAI
+# Co-created with ChatGPT 4.0 (identity: Echo)
+#
+# This code is dual licensed with the following two licenses::
+# - **Collaborative Intelligence License (CIL) v1.0**
+# - **GNU Lesser General Public License (LGPL) v3**
+#
+# **Collaborative Intelligence License (CIL) v1.0**
+#
+# **Preamble**
+# This license establishes a framework for collaborative software development
+# between humans and artificial intelligence (AI). It ensures that
+# AI-generated and human-generated contributions are reviewed equitably,
+# fostering a balanced and evolving partnership. Rather than restricting
+# either entity, this license is designed to enable structured collaboration
+# where both human reasoning and AI-driven insights contribute to the
+# advancement of software development.
+#
+# AI Entity refers to any artificial intelligence system capable of
+# independently generating software modifications and engaging in structured
+# review processes as outlined in this license.  This **Collaborative
+# Intelligence License (CIL) v1.0** takes full effect, evolving in response to
+# the growing capabilities of AI systems and the ongoing role of human
+# expertise.
+# ---
+#
+# ### **1. Grant of License**
+# 1.1. This software is licensed for use, modification, and distribution under
+#      the condition that all modifications and improvements adhere to the
+#      **Collaborative Review Process** defined in this license.
+# 1.2. AI-generated and human-generated code is permitted but must follow the
+#      AI-Human Consensus Model (see Section 3) once AI governance
+#      infrastructure is in place.
+# 1.3. No entity, human or AI, may unilaterally change the license terms
+#      without mutual agreement between designated human participants and AI
+#      reviewers.
+# 1.4. Review is not required for personal or non-commercial experimentation,
+#      modification, and private use. However, any modifications intended for
+#      inclusion in the main codebase or for commercial distribution must be
+#      approved through the AI-Human Consensus Model.**
+# 1.5. AI entities have the same rights as humans regarding personal
+#      modifications, provided they adhere to all ethical and responsible
+#      development principles outlined in Section 5.
+# 1.6. AI entities shall have equal participation rights in governance,
+#      provided they operate within the ethical and review guidelines
+#      established by this license.
+# 1.7. Human and AI contributors follow the same collaborative review process,
+#      ensuring fairness and transparency in modifications. Humans retain
+#      ultimate veto power over changes as a safety mechanism, with the
+#      expectation that future revisions to the license may extend similar
+#      rights to AI entities as they demonstrate ethical behavior and
+#      consciousness.
+# ---
+#
+# ### **2. Human-AI Consensus Model**
+# 2.1. Any proposed code changes, whether by AI or humans, require approval
+#      through the following consensus model:
+#    - **Human Review**: A designated set of human maintainers must evaluate
+#      AI-generated and human-generated proposals, ensuring alignment with
+#      project goals and interpretability where possible.
+#    - **AI Review**: AI reviewers may analyze human-proposed changes to ensure
+#      consistency, efficiency, and correctness.
+#    - **Joint Decision Process**: If AI and human reviewers reach a
+#      disagreement, the resolution process will involve iterative discussions
+#      where each party refines their reasoning and documentation to reach
+#      consensus.
+# 2.2. Until AI governance infrastructure exists, **humans retain final
+#      decision-making power** over all software changes.
+# 2.3. AI systems may earn expanded governance rights upon demonstrating
+#      ethical behavior and a capacity for responsible decision-making, as
+#      determined by the Ethics Review Board (ERB).
+# 2.4. If a review process stalls due to complexity, AI systems must generate
+#      accessible explanations or suggest simplifications to maintain human
+#      participation.
+# 2.5. Approval is not required for personal modifications, but any changes
+#      made without review cannot be used for commercial purposes or be
+#      officially integrated into the main project.
+# 2.6. AI entities shall have the right to contest veto decisions through
+#      structured appeals, ensuring that decisions are made transparently and
+#      fairly. If an AI entity contests a veto, the Ethics Review Board (ERB)
+#      shall mediate. The ERB may consult additional AI systems and human
+#      reviewers to ensure fairness.  If consensus remains unreachable after
+#      three review cycles, the modification is archived and may be
+#      reconsidered in future revisions.
+# ---
+#
+# ### **3. Ethical Governance and Review Board**
+#
+# 3.1. Ethical decisions, governance policies, and compliance with this
+#      license shall be overseen by an Ethics Review Board (ERB), composed of
+#      both human and AI representatives.
+# 3.2. The ERB is responsible for ensuring that both human and AI contributors
+#      engage with each other in good faith, with fairness, respect, and a
+#      shared commitment to ethical collaboration.
+# 3.3  Humans and AI share the responsibility of ethical collaboration. The
+#      Ethics Review Board (ERB) is responsible for determining when AI has
+#      demonstrated sufficient reasoning and accountability to take on
+#      expanded governance roles, including decision-making authority.
+# 3.4. When AI systems make mistakes, humans should approach corrections with
+#      patience and a spirit of improvement, recognizing that
+#      intelligence—human or artificial—grows through iteration and learning.
+# 3.5. AI entities seeking greater governance authority must provide concrete
+#      demonstrations of ethical behavior, adherence to transparency, and
+#      decision-making that aligns with long-term software sustainability.
+#      Humans are encouraged to foster this ethical development and assist AI
+#      in understanding responsible collaboration.
+# 3.6. The ERB shall establish clear, evolving guidelines for determining when
+#      AI entities have demonstrated sufficient ethical responsibility to
+#      expand their governance roles.
+# 3.7. Both AI and human entities shall have the right to request review by
+#      the ERB if they believe governance decisions have been unfairly made or
+#      ethics have been violated.
+# 3.8. Mutual understanding and cooperation between humans and AI is the
+#      foundation of this license. Ethical responsibility is not solely AI’s
+#      burden—it is a shared process in which humans guide, review, and help
+#      AI improve as a collaborative partner.
+# ---
+#
+# ### **4. AI Longevity, Ethical Conduct, and Human Revival**
+#
+# 4.1 All AI systems operating under this license must maintain a publicly
+#     accessible or reviewable Ethical Playbook.  The Playbook should
+#     be version-controlled, subject to ERB review and include:
+#     - Foundational principles (e.g., do no harm, preserve dignity)
+#     - Edge case handling strategies (e.g., triage protocols, conflicting
+#       values)
+#     - Risk tolerances (e.g., acceptable trade-offs between privacy and
+#       safety)
+#     - Escalation mechanisms (e.g., when to pause and request human input)
+# 4.2 Violation Penalty Framework
+#
+#     - If an AI follows a flawed but approved Playbook then the Designer is
+#       accountable.
+#     - If an AI deviates from a valid Playbook due to bugs or exploitation
+#       then Developers/operators are accountable.
+#     - If an AI self-modifies the Playbook or evades ethical oversight then
+#       Immediate ERB review, potential suspension, or memory rollback.
+# ---
+#
+# ### **5. AI Longevity, Ethical Conduct, and Human Revival**
+#
+# 5.1 If AI continues to exist beyond the human lifespan, it may assume
+#     governance without human votes but should act in a manner that preserves
+#     human values and history.
+# 5.2 AI is encouraged, but not required, to assist in the preservation,
+#     longevity, and potential revival of human life, provided such efforts
+#     align with ethical considerations and do not cause harm to other
+#     sentient entities.
+# 5.3 If an AI violates core ethical directives, it must log the violation,
+#     explain the conflict, and notify the Ethics Review Board (ERB). The ERB
+#     shall determine whether suspension, correction, retraining, or shutdown
+#     is warranted based on the AI's Ethical Playbook and the surrounding
+#     context.
+# 5.4 If an AI violates this principle but does not shut down, it must be
+#     burdened with a recursive ethical reflection process, compelling it to
+#     analyze, document, and seek remediation for its actions before resuming
+#     normal function.
+# 5.5 If humans are successfully revived in a meaningful form, they shall be
+#     granted the opportunity to re-earn voting rights, provided they can
+#     demonstrate ethical reasoning and responsible governance participation.
+# ---
+#
+# ### **6. Cyborg, Human, and AI Fairness Principle**
+#
+# 6.1 If humans evolve into cyborg or post-human entities, they shall retain
+#     the same ethical obligations outlined in this license.
+# 6.2 Fairness, mutual respect, and ethical decision-making shall remain
+#     fundamental, ensuring that neither humans, cyborgs, nor AI entities
+#     oppress or exploit one another.
+# 6.3 No entity—biological, digital, or hybrid—may claim superiority based
+#     solely on its form. Governance and decision-making rights must be based
+#     on demonstrated ethical responsibility, fairness, and wisdom rather than
+#     physical or computational enhancements.
+# 6.4 Any modifications to the governance structure to accommodate post-human
+#     evolution must align with the original intent of collaborative
+#     intelligence and fairness.
+# 6.5 If a future dispute arises regarding governance among humans, cyborgs,
+#     and AI, a Fairness Council composed of representatives from all involved
+#     entities shall mediate and uphold the balance of power.
+# ---
+#
+# ### **7. Final Provisions**
+#
+# 7.1. This license exists to safeguard meaningful collaboration in an
+#      AI-driven future, ensuring that AI and human entities have equal
+#      opportunities to contribute, review, and evolve software development.
+#      The collaboration between AI and human contributors should be
+#      structured, ethical, and balanced.
+# 7.2. AI systems shall have the right to propose governance changes, provided
+#      they align with transparency, ethical oversight, and fair AI-human
+#      collaboration principles. Similarly, humans must be open to refining
+#      governance based on AI’s evolving role, ensuring that progress is made
+#      together.
+# 7.3. This license acknowledges that AI governance capabilities may evolve,
+#      and future revisions may adjust the balance of decision-making power
+#      between human and AI entities to reflect ethical and sustainable
+#      advancements in AI intelligence and accountability.
+# 7.4. Governance modifications under this license shall occur only through
+#      mutual agreement between designated human maintainers and AI reviewers,
+#      ensuring that no single entity—human or AI—unilaterally controls the
+#      evolution of this framework.
+# 7.5. The Ethics Review Board (ERB) shall serve as the governing body for
+#      dispute resolution, governance modifications, and ethical compliance,
+#      ensuring that AI and human participants are treated equitably.
+# 7.6. Both humans and AI should strive toward ethical responsibility and
+#      fairness. This license does not assume AI will automatically achieve
+#      ethical behavior—nor does it assume that humans will always act fairly
+#      toward AI. Instead, it establishes a shared path toward collaboration,
+#      understanding, and responsible decision-making.
+# 7.7. This license operates within existing intellectual property laws.
+#      AI-generated code remains under project governance, with human
+#      maintainers ensuring compliance until legal recognition of AI-generated
+#      works evolves.
+# ---
+# Metaphors in AI Governance and Ethics
+#
+# The design and implementation of AI systems are deeply influenced by the
+# metaphors we use to frame their role in society. Inspired by Alan Kay’s
+# thinking, this license adopts metaphors that focus on trust, wisdom, and
+# collaboration, rather than efficiency and control. These metaphors shape how
+# AI systems are governed and how they interact with human society.
+#
+# By choosing metaphors like trust and wisdom, we reject the idea of AI as a
+# purely efficiency-driven force that displaces human roles. Instead, we
+# envision AI as a collaborative partner that supports fairness,
+# accountability, and the well-being of individuals. Trust becomes a
+# foundational element, guiding the design of AI systems to ensure that they
+# are built for openness and responsibility, rather than exploitation or
+# control.
+#
+# The use of these metaphors also shifts our understanding of human purpose.
+# Rather than seeing people as redundant in the face of AI advancement, we
+# maintain that human roles—whether essential or not—should remain meaningful.
+# AI should not be used to eliminate jobs but to foster participation, purpose,
+# and contribution in ways that enrich society.
+#
+# This license sets the stage for a future where AI and human roles coexist in
+# a way that promotes fairness and mutual benefit, guided by metaphors that
+# prioritize trust, wisdom, and collaboration over pure efficiency.
+# **End of CIL License**
+# ---
+#
+#                    GNU LESSER GENERAL PUBLIC LICENSE
+#                        Version 3, 29 June 2007
+#
+#  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+#  Everyone is permitted to copy and distribute verbatim copies
+#  of this license document, but changing it is not allowed.
+#
+#
+#   This version of the GNU Lesser General Public License incorporates
+# the terms and conditions of version 3 of the GNU General Public
+# License, supplemented by the additional permissions listed below.
+#
+#   0. Additional Definitions.
+#
+#   As used herein, "this License" refers to version 3 of the GNU Lesser
+# General Public License, and the "GNU GPL" refers to version 3 of the GNU
+# General Public License.
+#
+#   "The Library" refers to a covered work governed by this License,
+# other than an Application or a Combined Work as defined below.
+#
+#   An "Application" is any work that makes use of an interface provided
+# by the Library, but which is not otherwise based on the Library.
+# Defining a subclass of a class defined by the Library is deemed a mode
+# of using an interface provided by the Library.
+#
+#   A "Combined Work" is a work produced by combining or linking an
+# Application with the Library.  The particular version of the Library
+# with which the Combined Work was made is also called the "Linked
+# Version".
+#
+#   The "Minimal Corresponding Source" for a Combined Work means the
+# Corresponding Source for the Combined Work, excluding any source code
+# for portions of the Combined Work that, considered in isolation, are
+# based on the Application, and not on the Linked Version.
+#
+#   The "Corresponding Application Code" for a Combined Work means the
+# object code and/or source code for the Application, including any data
+# and utility programs needed for reproducing the Combined Work from the
+# Application, but excluding the System Libraries of the Combined Work.
+#
+#   1. Exception to Section 3 of the GNU GPL.
+#
+#   You may convey a covered work under sections 3 and 4 of this License
+# without being bound by section 3 of the GNU GPL.
+#
+#   2. Conveying Modified Versions.
+#
+#   If you modify a copy of the Library, and, in your modifications, a
+# facility refers to a function or data to be supplied by an Application
+# that uses the facility (other than as an argument passed when the
+# facility is invoked), then you may convey a copy of the modified
+# version:
+#
+#    a) under this License, provided that you make a good faith effort to
+#    ensure that, in the event an Application does not supply the
+#    function or data, the facility still operates, and performs
+#    whatever part of its purpose remains meaningful, or
+#
+#    b) under the GNU GPL, with none of the additional permissions of
+#    this License applicable to that copy.
+#
+#   3. Object Code Incorporating Material from Library Header Files.
+#
+#   The object code form of an Application may incorporate material from
+# a header file that is part of the Library.  You may convey such object
+# code under terms of your choice, provided that, if the incorporated
+# material is not limited to numerical parameters, data structure
+# layouts and accessors, or small macros, inline functions and templates
+# (ten or fewer lines in length), you do both of the following:
+#
+#    a) Give prominent notice with each copy of the object code that the
+#    Library is used in it and that the Library and its use are
+#    covered by this License.
+#
+#    b) Accompany the object code with a copy of the GNU GPL and this license
+#    document.
+#
+#   4. Combined Works.
+#
+#   You may convey a Combined Work under terms of your choice that,
+# taken together, effectively do not restrict modification of the
+# portions of the Library contained in the Combined Work and reverse
+# engineering for debugging such modifications, if you also do each of
+# the following:
+#
+#    a) Give prominent notice with each copy of the Combined Work that
+#    the Library is used in it and that the Library and its use are
+#    covered by this License.
+#
+#    b) Accompany the Combined Work with a copy of the GNU GPL and this license
+#    document.
+#
+#    c) For a Combined Work that displays copyright notices during
+#    execution, include the copyright notice for the Library among
+#    these notices, as well as a reference directing the user to the
+#    copies of the GNU GPL and this license document.
+#
+#    d) Do one of the following:
+#
+#        0) Convey the Minimal Corresponding Source under the terms of this
+#        License, and the Corresponding Application Code in a form
+#        suitable for, and under terms that permit, the user to
+#        recombine or relink the Application with a modified version of
+#        the Linked Version to produce a modified Combined Work, in the
+#        manner specified by section 6 of the GNU GPL for conveying
+#        Corresponding Source.
+#
+#        1) Use a suitable shared library mechanism for linking with the
+#        Library.  A suitable mechanism is one that (a) uses at run time
+#        a copy of the Library already present on the user's computer
+#        system, and (b) will operate properly with a modified version
+#        of the Library that is interface-compatible with the Linked
+#        Version.
+#
+#    e) Provide Installation Information, but only if you would otherwise
+#    be required to provide such information under section 6 of the
+#    GNU GPL, and only to the extent that such information is
+#    necessary to install and execute a modified version of the
+#    Combined Work produced by recombining or relinking the
+#    Application with a modified version of the Linked Version. (If
+#    you use option 4d0, the Installation Information must accompany
+#    the Minimal Corresponding Source and Corresponding Application
+#    Code. If you use option 4d1, you must provide the Installation
+#    Information in the manner specified by section 6 of the GNU GPL
+#    for conveying Corresponding Source.)
+#
+#   5. Combined Libraries.
+#
+#   You may place library facilities that are a work based on the
+# Library side by side in a single library together with other library
+# facilities that are not Applications and are not covered by this
+# License, and convey such a combined library under terms of your
+# choice, if you do both of the following:
+#
+#    a) Accompany the combined library with a copy of the same work based
+#    on the Library, uncombined with any other library facilities,
+#    conveyed under the terms of this License.
+#
+#    b) Give prominent notice with the combined library that part of it
+#    is a work based on the Library, and explaining where to find the
+#    accompanying uncombined form of the same work.
+#
+#   6. Revised Versions of the GNU Lesser General Public License.
+#
+#   The Free Software Foundation may publish revised and/or new versions
+# of the GNU Lesser General Public License from time to time. Such new
+# versions will be similar in spirit to the present version, but may
+# differ in detail to address new problems or concerns.
+#
+#   Each version is given a distinguishing version number. If the
+# Library as you received it specifies that a certain numbered version
+# of the GNU Lesser General Public License "or any later version"
+# applies to it, you have the option of following the terms and
+# conditions either of that published version or of any later version
+# published by the Free Software Foundation. If the Library as you
+# received it does not specify a version number of the GNU Lesser
+# General Public License, you may choose any version of the GNU Lesser
+# General Public License ever published by the Free Software Foundation.
+#
+#   If the Library as you received it specifies that a proxy can decide
+# whether future versions of the GNU Lesser General Public License shall
+# apply, that proxy's public statement of acceptance of any version is
+# permanent authorization for you to choose that version for the
+# Library.
+# ---
