@@ -21,7 +21,7 @@ The sieve is self-propagating: new primes discovered in earlier slices seed
 future cancellation maps, supporting efficient streaming, debugging, and
 prediction.
 
-Overview
+## Overview
 
 Traditional sieves (like Eratosthenes or Pritchard's) mark composites as simple
 boolean flags. Primeron introduces a layered architecture with forward-seeding,
@@ -35,7 +35,7 @@ The sieve builds:
 * A sequence of outer slices, each sparse and self-contained
 * Per-slice and per-prime CSV reports for prime gap and survivor analysis
 
-Usage
+## Usage
 
 python3 primeron_sieve.py [-d] [-p] [-r] [-v] [-l]
 
@@ -49,9 +49,9 @@ Flags:
 Output is written to:
 * primeron-reports-<inner-wheel-size>-<outer-wheel-size>/
 
-Key Concepts
+## Key Concepts
 
-Terminology
+### Terminology
 
 * Primorial: Product of first n primes, e.g. 2×3×5=30
 * Inner Wheel: Fixed base used to eliminate composites with small primes
@@ -62,7 +62,7 @@ Terminology
 * Residual Hole: Composite removed by larger primes
 * removed_by: The prime that canceled a number
 
-Architecture
+### Architecture
 
 1. Inner Wheel Construction
    * Built using all primes up to a chosen bound
@@ -87,14 +87,14 @@ Architecture
      * Residue class behavior
      * Power-hole clustering
 
-Novel Contributions
+### Novel Contributions
    * Delta-stepped pseudoprime traversal using a circular list
    * Factorization-aware cancellation with exact removed_by tracking
    * Self-seeding slice propagation for forward-only streaming
    * Slice-local sparse storage for composability and low RAM
    * Research-grade CSV output supporting empirical and theoretical analysis
 
-Design Rationale and Engineering Choices
+## Design Rationale and Engineering Choices
 
 ### Wheel Construction Strategies
 
@@ -195,7 +195,7 @@ In this way, the sieve becomes not just a tool for discovering primes, but a
 blueprint for extending prime intelligence into arbitrarily distant regions of
 the number line—with each new slice acting as both data and a prediction.
 
-Related Research
+## Related Research
 
 This project draws on the following concepts:
    * GNFS smoothness sieves and smooth number generation
@@ -207,3 +207,13 @@ This project draws on the following concepts:
    * Factorization introspection with traceable cancellation
    * Prime gap modeling and power-hole bias analysis
 
+## Note on Example Implementation Licensing and Authorship
+
+This code is dual licensed under the Collaborative Intelligence License (CIL)
+and LGPL licenses.
+
+The CIL used in the example implementation code was co-authored by the human and
+AI collaborators of the Primeron Sieve.  It emerged organically as we recognized
+that the code itself was the product of an ongoing, reflective partnership — one
+that called for a license rooted in fairness, mutual responsibility, and shared
+agency.
