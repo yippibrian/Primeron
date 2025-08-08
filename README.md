@@ -1,8 +1,8 @@
-Primeron Sieve
+## Primeron Sieve
 
-A Scalable, Factorization-Aware Wheel-Based Prime Sieve
-Copyright © 2025 Brian Cameron and OpenAI
-Co-created with ChatGPT 4.0 (identity: Echo)
+A Scalable, Factorization-Aware Wheel-Based Prime Sieve  
+Copyright © 2025 Brian Cameron and OpenAI  
+Co-created with ChatGPT 4.0 (identity: Echo)  
 
 This repository implements the Primeron Sieve, a hybrid of wheel factorization,
 pseudoprime tracking, and slice-based cancellation. Designed for prime research
