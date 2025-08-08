@@ -1,0 +1,33 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{float}
+\usetikzlibrary{arrows.meta, positioning}
+\geometry{margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\title{Primeron Sieve: A Scalable, Factorization-Aware Wheel-Based Prime Sieve}
+\author{Brian Cameron \\ 08/08/2025 \\ AppSec (Application Security) Architect. \\ Co-created with ChatGPT 4.0 (identity: Echo)}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+The Primeron Sieve implements a scalable, modular extension of Pritchard’s sieve via a dual-layer wheel architecture. It supports high-resolution factorization introspection and modular slice-based sieving. The algorithm separates inner and outer wheels, tracks the cause of each composite cancellation, and leverages pseudoprime-linked structures to propagate sieving beyond fixed ranges. This paper proposes the Primeron Sieve architecture, formalizes its operational model, and places it in the context of related sieve algorithms. We also show how modest hardware resources can build extremely large wheels that eliminate over 90\% of non-prime candidates before any standard test is performed. This approach complements GNFS preprocessing techniques by extending smooth number detection with fine-grained factor tracking and adaptive slicing.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\input{primeron_sections}
+
+\end{document}

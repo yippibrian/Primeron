@@ -1,0 +1,17 @@
+
+\section{Introduction}
+Prime sieving algorithms have long been central to computational number theory. Classical methods such as the Sieve of Eratosthenes provide a simple and effective way to enumerate primes by eliminating multiples of known factors. Later refinements, including the Sieve of Pritchard, introduced more memory-efficient representations of survivors using dynamic data structures such as linked lists, enabling sieving without marking a full boolean array.
+
+
+The Primeron Sieve builds on this legacy by revealing a previously underexplored relationship between Pritchard’s linked-list survivor tracking and wheel-based factorization. Primeron demonstrates that Pritchard’s method, when applied within the structure of a modular wheel, naturally produces a survivorship map that reflects the holes in a primorial-based factorization cycle. By merging these ideas, Primeron introduces a new sieve architecture that is both analytically revealing and practically scalable.
+
+Specifically, Primeron:
+\begin{itemize}
+  \item Implements circular linked lists to represent pseudoprime survivors, supporting efficient traversal, extension, and modular stepping;
+  \item Introduces segmented data structures called slices, which scale cancellation operations and pseudoprime tracking across trillions of values without requiring global memory;
+  \item Uses forward-only, slice-based cancellation, where composites are eliminated by propagating modular steps from known prime residues, eliminating the need for trial division;
+  \item Tracks per-prime cancellation metadata, enabling fine-grained analysis of which primes cancel which composites and when.
+\end{itemize}
+
+By bridging the design of Pritchard’s sieve with wheel-based modular arithmetic, Primeron shows that linked-list survivor structures and factorization-aware wheels are not separate ideas—but rather components of a unified, scalable framework for prime sieving and modular number theory.  Primeron offers a practical alternative to traditional sieves by blending wheel-based factor awareness with segmented pseudoprime propagation.
+\input{primeron_sections_2.tex}
