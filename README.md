@@ -1,4 +1,4 @@
-![Primeron](./Primeron.png)
+<img src="./Primeron.png" alt="Primeron logo" width="300"/>
 ## Primeron Sieve
 
 A Scalable, Factorization-Aware Wheel-Based Prime Sieve  
