@@ -47,7 +47,7 @@ Flags:
 -l : Generate lightweight removal statistics  
 
 Output is written to:
-* primeron-reports-<inner-wheel-size>-<outer-wheel-size>/
+* `primeron-reports-<inner-wheel-size>-<outer-wheel-size>/`
 
 ## Key Concepts
 
