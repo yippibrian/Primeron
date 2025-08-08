@@ -1,3 +1,4 @@
+![Primeron](./primeron.png)
 ## Primeron Sieve
 
 A Scalable, Factorization-Aware Wheel-Based Prime Sieve  

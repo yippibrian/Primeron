@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.13
+#!/usr/bin/python3
 # PrimeronSieve: A Modular, Self-Seeding Prime Wheel Sieve
 # Copyright (C) 2025 Brian Cameron and OpenAI
 # Co-created with ChatGPT 4.0 (identity: Echo)
