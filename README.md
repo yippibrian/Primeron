@@ -39,12 +39,12 @@ The sieve builds:
 
 python3 primeron_sieve.py [-d] [-p] [-r] [-v] [-l]
 
-Flags:
--d : Debug output
--p : Profile performance
--r : Generate per-wheel and slice reports
--v : Validate sieve correctness
--l : Generate lightweight removal statistics
+Flags:  
+-d : Debug output  
+-p : Profile performance  
+-r : Generate per-wheel and slice reports  
+-v : Validate sieve correctness  
+-l : Generate lightweight removal statistics  
 
 Output is written to:
 * primeron-reports-<inner-wheel-size>-<outer-wheel-size>/
